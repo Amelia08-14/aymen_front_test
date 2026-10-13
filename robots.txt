@@ -1,0 +1,83 @@
+# ============================================
+# robots.txt — Aymen Promotion (SEO + GEO)
+# ============================================
+
+# Crawlers classiques (Google, Bing, etc.)
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /batimat-admin
+Disallow: /batimat/admin
+Disallow: /tracking-admin
+Disallow: /tracking-flyer
+Disallow: /tracking-batimat
+Disallow: /_next/static/chunks/
+Disallow: /*?*utm_
+Disallow: /*?*fbclid
+Disallow: /*?*qr=
+
+# ============================================
+# AI SEARCH — AUTORISÉS (visibilité GEO)
+# ============================================
+
+# OpenAI / ChatGPT
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Google Gemini / AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl (source de données pour de nombreux LLMs)
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# ============================================
+# Bots agressifs / non utiles — BLOQUÉS
+# ============================================
+User-agent: Bytespider
+Disallow: /
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Déclarer le sitemap
+Sitemap: https://aymenpromotion-dz.com/sitemap.xml

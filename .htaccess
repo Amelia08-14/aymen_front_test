@@ -1,0 +1,13 @@
+# Application React (BrowserRouter) : toute URL qui n'est pas un fichier ou un
+# dossier réel (/batimat, /batimat/stand-a, /projets, ...) doit renvoyer
+# index.html, puis React affiche la bonne page.
+# Le backend est sur un autre sous-domaine (backend.aymenpromotion-dz.com) :
+# aucune exclusion /api n'est nécessaire ici.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
