@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
 import HomePage from "./pages/HomePage";
@@ -8,6 +8,7 @@ import StickyContactBar from "./components/StickyContactBar";
 import CookieBanner from "./components/CookieBanner";
 import Seo from "./components/Seo";
 import { captureAttribution } from "./utils/attribution";
+import { trackPageView } from "./utils/aymenTracker";
 
 // Lazy loading the other routes to reduce initial bundle size
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
@@ -76,6 +77,15 @@ function HomeRoute() {
   );
 }
 
+// Enregistre chaque page vue (après consentement cookies) pour le suivi du formulaire de devis.
+function VisitorTracking() {
+  const { pathname, search } = useLocation();
+  useEffect(() => {
+    trackPageView();
+  }, [pathname, search]);
+  return null;
+}
+
 function App() {
   // Suivi des arrivées via QR code / liens tracés (flyers, bâches BATIMAT).
   useEffect(() => {
@@ -129,6 +139,7 @@ function App() {
     <HelmetProvider>
       <BrowserRouter>
         <Seo />
+        <VisitorTracking />
         {/* Retrait de min-h-screen qui peut parfois causer des conflits de hauteur */}
         <div className="relative text-white">
           <StickyContactBar />

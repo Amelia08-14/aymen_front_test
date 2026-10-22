@@ -8,8 +8,6 @@ export default function CookieBanner() {
   useEffect(() => {
     // Vérifier si l'utilisateur a déjà fait un choix
     const cookieConsent = localStorage.getItem('aymen_cookie_consent');
-    // Visiteur ayant déjà accepté : le suivi doit reprendre sans rouvrir le bandeau
-    if (cookieConsent === 'accepted') grantTrackerConsent();
     if (!cookieConsent) {
       // Un petit délai pour ne pas agresser l'utilisateur dès la première seconde
       const timer = setTimeout(() => {
