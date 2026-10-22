@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { grantTrackerConsent, revokeTrackerConsent } from '../utils/aymenTracker';
 
 export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
@@ -7,6 +8,8 @@ export default function CookieBanner() {
   useEffect(() => {
     // Vérifier si l'utilisateur a déjà fait un choix
     const cookieConsent = localStorage.getItem('aymen_cookie_consent');
+    // Visiteur ayant déjà accepté : le suivi doit reprendre sans rouvrir le bandeau
+    if (cookieConsent === 'accepted') grantTrackerConsent();
     if (!cookieConsent) {
       // Un petit délai pour ne pas agresser l'utilisateur dès la première seconde
       const timer = setTimeout(() => {
@@ -23,11 +26,13 @@ export default function CookieBanner() {
     // Si nous avons des scripts qui nécessitent un consentement (comme GA ou Meta Pixel),
     // nous pourrions déclencher un événement personnalisé ici pour les charger
     window.dispatchEvent(new Event('cookie_consent_accepted'));
+    grantTrackerConsent();
   };
 
   const handleDecline = () => {
     localStorage.setItem('aymen_cookie_consent', 'declined');
     setIsVisible(false);
+    revokeTrackerConsent();
   };
 
   if (!isVisible) return null;

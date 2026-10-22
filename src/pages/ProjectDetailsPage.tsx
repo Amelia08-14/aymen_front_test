@@ -6,6 +6,7 @@ import Seo from "../components/Seo";
 import { PROJECTS } from "../data/mockData";
 import { API_BASE_URL } from "../config";
 import { getHubspotContext } from "../utils/hubspotContext";
+import { getTrackerPayload } from "../utils/aymenTracker";
 import { 
   ReceptionIcon, 
   DomotiqueIcon, 
@@ -746,7 +747,7 @@ function DetailsContact({ projectTitle }: { projectTitle?: string }) {
       const response = await fetch(`${API_BASE_URL}/api/quotes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, ...getHubspotContext() }),
+        body: JSON.stringify({ ...formData, ...getHubspotContext(), ...getTrackerPayload() }),
       });
 
       const data = await response.json();
